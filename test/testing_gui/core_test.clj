@@ -116,3 +116,30 @@
       (goto-category-panel driver)
       (is (= true (e/has-text? driver newname))
           "kategorii jakimś cudem nie ma na panelu"))))
+
+
+
+(deftest mod-kat-neg
+  ;; should run after add-kat-pos
+  (e/with-firefox driver
+    (doto driver
+      (login admin)
+      (goto-category-panel))
+    (let [slug (ex->nil (e/get-element-text driver (by-text "sierściuchy")))
+          newname (str "meow  meow" (random-uuid))]
+      (is (some? slug) "brak odpowiedniej kategorii")
+      (doto driver
+        (e/click  (format "(//td[contains(text(), '%s')]/parent::*)//a[contains(text(), 'Edit')]" slug))
+        (e/wait-visible :slug)
+        (e/clear :slug)
+        (e/fill :slug newname)
+        (e/wait 1)
+        (e/click (by-text "Save"))
+        (e/wait-visible {:tag :div :fn/has-class "alert"})
+        (e/wait 1))
+      (is (= "Slug cannot contain spaces"
+             (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
+          "zła wiadomość błędu")
+      (goto-category-panel driver)
+      (is (= false (e/has-text? driver newname))
+          "zła kategoria została dodana"))))
