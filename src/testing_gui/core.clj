@@ -6,7 +6,7 @@
 
 
 
-
+(comment (defonce driver (e/firefox)))
 (def root "https://practicesoftwaretesting.com/#/")
 (def admin {:password "welcome01"
             :email "admin@practicesoftwaretesting.com"
@@ -33,9 +33,11 @@
   (doto driver
     (e/go root)
     (e/wait-visible "//li/a")
+    (e/wait 0.1)
     (e/click "//nav[1]//div[1]//div[1]//ul[1]//li[4]//a[1]")
     (e/wait-has-text-everywhere "Sign out")
-    (e/click "/html[1]/body[1]/app-root[1]/app-header[1]/nav[1]/div[1]/div[1]/ul[1]/li[4]/ul[1]/li[13]/a[1]")
+    (e/wait 0.1)
+    (e/click "/html[1]/body[1]/app-root[1]/app-header[1]/nav[1]/div[1]/div[1]/ul[1]/li[4]/ul[1]/li[last()]/a[1]")
     ))
 ;; (logout driver)
 ;; (login driver admin)

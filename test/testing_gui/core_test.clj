@@ -141,3 +141,76 @@
         (goto-category-panel driver)
         (is (= false (e/has-text? driver newname))
             "zła kategoria została dodana")))))
+
+
+
+(defn just-type [text]
+  {:type    "key"
+   :id (random-uuid)
+   :actions (->> text
+                 (map str)
+                 (mapcat (fn [key]
+                           [{:type "keyDown" :value key}
+                            {:type "keyUp" :value key}])))})
+
+(defn register [driver form]
+  (doto driver
+    (e/go root)
+    (e/wait-has-text-everywhere "Sign in")
+    (e/wait 0.1)
+    (e/click (by-text "Sign in"))
+    (e/wait-has-text-everywhere "Register")
+    (e/wait 0.1)
+    (e/click (by-text "Register"))
+    (e/wait-has-text-everywhere "Register")
+    (e/wait 0.1)
+    (e/fill-multi (dissoc form :date :country)) ;these two are tricky
+    (e/select :country (:country form))
+    (e/click :dob)
+    (e/wait 0.1)
+    (e/perform-actions (just-type (:date form)))
+    (e/wait 0.1)
+    (e/click (by-text "Register"))))
+
+(def base-form
+  {:first_name "kitty"
+   :last_name "cat"
+   :postcode "123-35"
+   :city "mrau"
+   :address "miaaaau 13"
+   :phone "123456789"
+   :email "kibby@mraumail.com"
+   :state "somestate"
+   :password "faggot :3333"
+   :country "Poland"
+   :date "03052003"})
+
+(deftest testing-account-creation
+  (e/with-firefox driver
+    (testing "creating-account-positive"
+      (let [r (->> (random-uuid) str (take 5) (reduce str))
+            email (str r "@mraumail.com")
+            pass (random-uuid)
+            form (assoc base-form :email email :password pass)]
+        (doto driver
+          (register form)
+          (e/wait 0.5)
+          (e/wait-has-text-everywhere "Login"))
+        (is (= (str root "auth/login") (e/get-url driver)) "didn't get redirected to registration")
+        (doto driver
+          (e/fill-multi {:password pass :email email})
+          (e/wait 0.5)
+          (e/click "//input[@value='Login']")
+          (e/wait 1)
+          (e/wait-has-text-everywhere "My account"))
+        (is (= true (e/has-text? driver (str (:first_name form) " " (:last_name form)))) "cannot log in")))
+    (logout driver)
+    (testing "creating-account-negative"
+      (let [r (->> (random-uuid) str (take 5) (reduce str))
+            email (str r " wrong mail")
+            pass (random-uuid)
+            form (assoc base-form :email email :password pass)]
+        (doto driver
+          (register form)
+          (e/wait-visible {:tag :div :fn/has-class "alert"}))
+        (is (= true (e/has-text? driver "E-mail format is invalid")) "brak powiadomienia o niepoprawnym mailu")))))
