@@ -12,6 +12,8 @@
     (e/go (str url "/admin/categories"))
     (e/wait-has-text-everywhere "Category")
     (e/wait 1)))
+
+
 (defn add-category [driver cath]
   (doto driver
     (goto-category-panel)
@@ -26,6 +28,7 @@
     (e/click (by-text "Save"))
     (e/wait-visible {:tag :div :fn/has-class "alert"})
     (e/wait 1)))
+
 
 
 (deftest add-kat-pos
@@ -84,3 +87,32 @@
       (goto-category-panel driver)
       (is (= false (e/has-text? driver name))
           "błędna kategoria jest widoczna w panelu"))))
+
+(defmacro ex->nil [& forms]
+  `(try ~@forms
+     (catch Throwable ~'_ nil)))
+
+(deftest mod-kat-pos
+  ;; should run after add-kat-pos
+  (e/with-firefox driver
+    (doto driver
+      (login admin)
+      (goto-category-panel))
+    (let [slug (ex->nil (e/get-element-text driver (by-text "koty-domowe")))
+          newname (str "sierściuchy" (random-uuid))]
+      (is (some? slug) "brak odpowiedniej kategorii")
+      (doto driver
+        (e/click  (format "(//td[contains(text(), '%s')]/parent::*)//a[contains(text(), 'Edit')]" slug))
+        (e/wait-visible :name)
+        (e/clear :name)
+        (e/fill :name newname)
+        (e/wait 1)
+        (e/click (by-text "Save"))
+        (e/wait-visible {:tag :div :fn/has-class "alert"})
+        (e/wait 1))
+      (is (= "Category saved!"
+             (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
+          "nie udało się dodać kategorii")
+      (goto-category-panel driver)
+      (is (= true (e/has-text? driver newname))
+          "kategorii jakimś cudem nie ma na panelu"))))
