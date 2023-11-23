@@ -4,7 +4,7 @@
    [etaoin.keys :as k]
    [clojure.string :as str]))
 
-(defonce driver (e/firefox))
+
 
 
 (def root "https://practicesoftwaretesting.com/#/")
