@@ -9,7 +9,7 @@
 (defn goto-category-panel [driver]
   (is (= true (login driver admin)) "couldn't log in")
   (doto driver
-    (e/go (str url "/admin/categories"))
+    (e/go (str root "/admin/categories"))
     (e/wait-has-text-everywhere "Category")
     (e/wait 1)))
 
