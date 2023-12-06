@@ -18,6 +18,8 @@
 (defn by-text ([class text] {:xpath (format "//%s[contains(text(),'%s')]" class text)})
   ([text] (by-text "*" text)))
 
+(defn nav [x] (format "//*[@data-test='%s']" x))
+
 (defn login [driver acc]
   (e/go driver *root*)
   (if (e/has-text? driver (:name admin)) true
@@ -37,10 +39,10 @@
     (e/go *root*)
     (e/wait-visible "//li/a")
     (e/wait 0.1)
-    (e/click "//nav[1]//div[1]//div[1]//ul[1]//li[4]//a[1]")
+    (e/click (nav "nav-user-menu"))
     (e/wait-has-text-everywhere "Sign out")
     (e/wait 0.1)
-    (e/click "/html[1]/body[1]/app-root[1]/app-header[1]/nav[1]/div[1]/div[1]/ul[1]/li[4]/ul[1]/li[last()]/a[1]")
-    ))
+    (e/click (nav "nav-sign-out"))))
+
 ;; (logout driver)
 ;; (login driver admin)
