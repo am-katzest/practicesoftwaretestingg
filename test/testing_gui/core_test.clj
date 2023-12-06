@@ -217,7 +217,7 @@
           (e/click "//input[@value='Login']")
           (e/wait 1)
           (e/wait-has-text-everywhere "My account"))
-        (is (= true (e/has-text? driver (str (:first_name form) " " (:last_name form)))) "cannot log in")))
+        (is (= true (e/has-text? driver (str (:first_name form) " " (:last_name form)))) "account creation failed")))
     (logout driver)
     (testing "creating-account-negative"
       (let [r (->> (random-uuid) str (take 5) (reduce str))
