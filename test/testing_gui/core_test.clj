@@ -27,11 +27,17 @@
     (e/click :parent_id)
     (e/wait-has-text-everywhere (:parent_id cath))
     (e/click (by-text (:parent_id cath)))
-    (e/wait 1)
+    (e/wait 0.5)
     (e/click (by-text "Save"))
     (e/wait-visible {:tag :div :fn/has-class "alert"})
-    (e/wait 1)))
+    (e/wait 0.5)))
 
+(defn delete-category [driver slug]
+  (goto-category-panel driver)
+  (when (e/has-text? driver slug)
+    (e/double-click driver (format "(//td[contains(text(), '%s')]/parent::*)//button" "drill")))
+  (e/wait 0.1))
+(delete-category driver "koty-domowe")
 
 (deftest category-testing
   (e/with-firefox driver
