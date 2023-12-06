@@ -10,6 +10,7 @@
 (def ^:dynamic *root* (or (System/getenv "URL")
                         "https://practicesoftwaretesting.com/#/"))
 
+
 (def admin {:password "welcome01"
             :email "admin@practicesoftwaretesting.com"
             :name "John Doe"})
