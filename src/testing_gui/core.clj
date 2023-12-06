@@ -7,7 +7,9 @@
 
 
 (comment (defonce driver (e/firefox)))
-(def root "https://practicesoftwaretesting.com/#/")
+(def ^:dynamic *root* (or (System/getenv "URL")
+                        "https://practicesoftwaretesting.com/#/"))
+
 (def admin {:password "welcome01"
             :email "admin@practicesoftwaretesting.com"
             :name "John Doe"})
@@ -16,7 +18,7 @@
   ([text] (by-text "*" text)))
 
 (defn login [driver acc]
-  (e/go driver root)
+  (e/go driver *root*)
   (if (e/has-text? driver (:name admin)) true
       (do (doto driver
             (e/wait-visible (by-text "Sign in"))
@@ -31,7 +33,7 @@
           (e/has-text? driver (:name admin)))))
 (defn logout [driver]
   (doto driver
-    (e/go root)
+    (e/go *root*)
     (e/wait-visible "//li/a")
     (e/wait 0.1)
     (e/click "//nav[1]//div[1]//div[1]//ul[1]//li[4]//a[1]")
