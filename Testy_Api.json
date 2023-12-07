@@ -1,0 +1,1431 @@
+{
+	"info": {
+		"_postman_id": "ea1f8d9e-e3b2-4e5a-bdb5-a010a4c5d845",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18755617",
+		"_collection_link": "https://gigachad.postman.co/workspace/Team-Workspace~0712839d-39a5-4f19-8c17-d13124f24052/collection/18755617-ea1f8d9e-e3b2-4e5a-bdb5-a010a4c5d845?action=share&source=collection_link&creator=18755617"
+	},
+	"item": [
+		{
+			"name": "15 GetProductByIdPositive",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products/01HEV50WtN75VS96M64K5JF20T8",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products",
+						"01HEV50WtN75VS96M64K5JF20T8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "16 GETProductByIdNegative",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products/meow",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products",
+						"meow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "17 GETProductByIdNegative",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products/a%20%20a",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products",
+						"a%20%20a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "18 PostProductPositive",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "secret",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1NzU5OTcsImV4cCI6MTY5OTU3NjI5NywibmJmIjoxNjk5NTc1OTk3LCJqdGkiOiJBV0xLSTFNWnR5Y0FUNnpxIiwic3ViIjoiMDFIRVY4RVNEUUo4NU4xU1czTlZONUFONDgiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.bJKHlyjSg90Kb6uWEjMiajpkbQyncHDEnZRehEyxKgI",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"aa\",\n    \"price\": 12.5,\n    \"category_id\": \"01HEV50WN06FYKCXYE07AZ184B\",\n    \"brand_id\": \"01HEV50WMQZ99V8Y50NKC7Z8M1\",\n    \"is_location_offer\": true,\n    \"is_rental\": false,\n    \"product_image_id\": \"01HEV50WN3MG1Z3MBXYMQ1JJ35\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "19 PostProductNegativeUnauthorized",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"aa\",\n    \"price\": 12.5,\n    \"category_id\": \"01HEV50WN06FYKCXYE07AZ184B\",\n    \"brand_id\": \"01HEV50WMQZ99V8Y50NKC7Z8M1\",\n    \"is_location_offer\": true,\n    \"is_rental\": false,\n    \"product_image_id\": \"01HEV50WN3MG1Z3MBXYMQ1JJ35\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "20 PostProductNegativeForbidden",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"aa\",\n    \"price\": 12.5,\n    \"category_id\": \"01HEV50WN06FYKCXYE07AZ184B\",\n    \"brand_id\": \"01HEV50WMQZ99V8Y50NKC7Z8M1\",\n    \"is_location_offer\": true,\n    \"is_rental\": false,\n    \"product_image_id\": \"01HEV50WN3MG1Z3MBXYMQ1JJ35\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "21 PostProductInvalid",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "secret",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1NzU5OTcsImV4cCI6MTY5OTU3NjI5NywibmJmIjoxNjk5NTc1OTk3LCJqdGkiOiJBV0xLSTFNWnR5Y0FUNnpxIiwic3ViIjoiMDFIRVY4RVNEUUo4NU4xU1czTlZONUFONDgiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.bJKHlyjSg90Kb6uWEjMiajpkbQyncHDEnZRehEyxKgI",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"aa\",\n    \"price\": 12.5,\n    \"category_id\": \"01HEV50WN06FYKCXYE07AZ184B\",\n    \"brand_id\": \"01HEV50WMQZ99V8Y50NKC7Z8M1\",\n    \"is_rental\": false,\n    \"product_image_id\": \"01HEV50WN3MG1Z3MBXYMQ1JJ35\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "22 PutProductPositive",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1Nzg3ODEsImV4cCI6MTY5OTU3OTA4MSwibmJmIjoxNjk5NTc4NzgxLCJqdGkiOiI3Smt2SklQemFpSXpiTkdRIiwic3ViIjoiMDFIRVZCV0tTSlpOU1FBRDEyVFdQOVpBQkIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.Majc3AWETvMQXrT0RzYCScXvneO_7Ir3g_bApdo6RQg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"01HEVBWKT21NHN3XDPS8C9H4YZ\",\"name\":\"Combination Pliers\",\"description\":\", fauc aliquet turpis.\",\"stock\":11,\"price\":\"14.14\",\"brand_id\":\"01HEVBWKSFHVMSVQS0VR0WB3ZV\",\"category_id\":\"01HEVBWKSVFPACWGHDD9M1EAQ2\",\"product_image_id\":\"01HEVBWKSY8K22KJJRXP7WRRPA\",\"is_location_offer\":0,\"is_rental\":0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products/01HEVBWKT21NHN3XDPS8C9H4YZ",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products",
+						"01HEVBWKT21NHN3XDPS8C9H4YZ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "23 PutProductInvalid",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "secret",
+							"value": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1Nzg0NjIsImV4cCI6MTY5OTU3ODc2MiwibmJmIjoxNjk5NTc4NDYyLCJqdGkiOiJpRm1Ea0FBMVcxMmc2eHdXIiwic3ViIjoiMDFIRVZCV0tTSlpOU1FBRDEyVFdQOVpBQkIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.C3IE3BQnIJGp-LFgqoY8QB62Kvs8P5do5ryyyBTDAVc\",\n    \"token_type\": \"bearer\",\n    \"expires_in\": 300\n}",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"aa\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products/meow",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products",
+						"meow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "24 PutProductUnauthorized",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "secret",
+							"value": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1Nzg0NjIsImV4cCI6MTY5OTU3ODc2MiwibmJmIjoxNjk5NTc4NDYyLCJqdGkiOiJpRm1Ea0FBMVcxMmc2eHdXIiwic3ViIjoiMDFIRVZCV0tTSlpOU1FBRDEyVFdQOVpBQkIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.C3IE3BQnIJGp-LFgqoY8QB62Kvs8P5do5ryyyBTDAVc\",\n    \"token_type\": \"bearer\",\n    \"expires_in\": 300\n}",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "headerPrefix",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":\"01HEVBWKT21NHN3XDPS8C9H4YZ\",\"name\":\"Combination Pliers\",\"description\":\", fauc aliquet turpis.\",\"stock\":11,\"price\":\"14.14\",\"brand_id\":\"01HEVBWKSFHVMSVQS0VR0WB3ZV\",\"category_id\":\"01HEVBWKSVFPACWGHDD9M1EAQ2\",\"product_image_id\":\"01HEVBWKSY8K22KJJRXP7WRRPA\",\"is_location_offer\":0,\"is_rental\":0}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products/01HEV50WtN75VS96M64K5JF20T8",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products",
+						"01HEV50WtN75VS96M64K5JF20T8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "25 DeleteProductPositive",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1Nzg3ODEsImV4cCI6MTY5OTU3OTA4MSwibmJmIjoxNjk5NTc4NzgxLCJqdGkiOiI3Smt2SklQemFpSXpiTkdRIiwic3ViIjoiMDFIRVZCV0tTSlpOU1FBRDEyVFdQOVpBQkIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.Majc3AWETvMQXrT0RzYCScXvneO_7Ir3g_bApdo6RQg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"aa\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products/01HEV50WtN75VS96M64K5JF20T8",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products",
+						"01HEV50WtN75VS96M64K5JF20T8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "26 DeleteProductInvalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Sprawdź kod 404 i wiadomość\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"    pm.expect(pm.response.text()).to.include(\"\\\"message\\\":Resource not found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1Nzg3ODEsImV4cCI6MTY5OTU3OTA4MSwibmJmIjoxNjk5NTc4NzgxLCJqdGkiOiI3Smt2SklQemFpSXpiTkdRIiwic3ViIjoiMDFIRVZCV0tTSlpOU1FBRDEyVFdQOVpBQkIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.Majc3AWETvMQXrT0RzYCScXvneO_7Ir3g_bApdo6RQg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"aa\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products/meow",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products",
+						"meow"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "27 DeleteProductUnauthorized",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"aa\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/products/01HEV50WtN75VS96M64K5JF20T8",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"products",
+						"01HEV50WtN75VS96M64K5JF20T8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCategoryByIdPositive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expect = require('chai').expect;\r",
+							"\r",
+							"// Opis testu\r",
+							"pm.test(\"Sprawdź status odpowiedzi\", function () {\r",
+							"    // Sprawdzamy, czy status odpowiedzi jest równy 200 (OK)\r",
+							"    expect(pm.response.status).to.equal('OK');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Sprawdź, czy odpowiedź zawiera oczekiwane ciało\", function () {\r",
+							"    // Oczekiwane ciało odpowiedzi\r",
+							"    var expectedBody = {\r",
+							"        \"id\": \"01HEV50WMXEV5XV2E4Z1DAF0BC\",\r",
+							"        \"name\": \"Hand Tools\",\r",
+							"        \"slug\": \"hand-tools\",\r",
+							"        \"parent_id\": null,\r",
+							"        \"sub_categories\": [\r",
+							"            {\r",
+							"                \"id\": \"01HEV50WN06FYKCXYE07AZ1847\",\r",
+							"                \"name\": \"Hammer\",\r",
+							"                \"slug\": \"hammer\",\r",
+							"                \"parent_id\": \"01HEV50WMXEV5XV2E4Z1DAF0BC\",\r",
+							"                \"sub_categories\": []\r",
+							"            },\r",
+							"            {\r",
+							"                \"id\": \"01HEV50WN06FYKCXYE07AZ1848\",\r",
+							"                \"name\": \"Hand Saw\",\r",
+							"                \"slug\": \"hand-saw\",\r",
+							"                \"parent_id\": \"01HEV50WMXEV5XV2E4Z1DAF0BC\",\r",
+							"                \"sub_categories\": []\r",
+							"            },\r",
+							"            {\r",
+							"                \"id\": \"01HEV50WN06FYKCXYE07AZ1849\",\r",
+							"                \"name\": \"Wrench\",\r",
+							"                \"slug\": \"wrench\",\r",
+							"                \"parent_id\": \"01HEV50WMXEV5XV2E4Z1DAF0BC\",\r",
+							"                \"sub_categories\": []\r",
+							"            },\r",
+							"            {\r",
+							"                \"id\": \"01HEV50WN06FYKCXYE07AZ184A\",\r",
+							"                \"name\": \"Screwdriver\",\r",
+							"                \"slug\": \"screwdriver\",\r",
+							"                \"parent_id\": \"01HEV50WMXEV5XV2E4Z1DAF0BC\",\r",
+							"                \"sub_categories\": []\r",
+							"            },\r",
+							"            {\r",
+							"                \"id\": \"01HEV50WN06FYKCXYE07AZ184B\",\r",
+							"                \"name\": \"Pliers\",\r",
+							"                \"slug\": \"pliers\",\r",
+							"                \"parent_id\": \"01HEV50WMXEV5XV2E4Z1DAF0BC\",\r",
+							"                \"sub_categories\": []\r",
+							"            },\r",
+							"            {\r",
+							"                \"id\": \"01HEV50WN06FYKCXYE07AZ184F\",\r",
+							"                \"name\": \"Drill\",\r",
+							"                \"slug\": \"drill\",\r",
+							"                \"parent_id\": \"01HEV50WMXEV5XV2E4Z1DAF0BC\",\r",
+							"                \"sub_categories\": []\r",
+							"            }\r",
+							"        ]\r",
+							"    };\r",
+							"\r",
+							"    // Sprawdzamy, czy odpowiedź zawiera oczekiwane ciało\r",
+							"    pm.response.to.have.jsonBody(expectedBody);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HEV50WMXEV5XV2E4Z1DAF0BC",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HEV50WMXEV5XV2E4Z1DAF0BC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCategoryByIdNegative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expect = require('chai').expect;\r",
+							"\r",
+							"// Opis testu\r",
+							"pm.test(\"Sprawdź status odpowiedzi\", function () {\r",
+							"    // Sprawdzamy, czy status odpowiedzi jest równy 404 (NOT FOUND)\r",
+							"    expect(pm.response.status).to.equal('Not Found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HETY55G9CZVNSEW1BE4Z825A",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HETY55G9CZVNSEW1BE4Z825A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCategoryByIdNegativeValid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expect = require('chai').expect;\r",
+							"\r",
+							"\r",
+							"pm.test(\"Sprawdź status odpowiedzi\", function () {\r",
+							"    expect(pm.response.status).to.equal('Unprocessable Entity');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"message\": \"Random message\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HEV50WMXEV5XV2E4Z1DAF0BC",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HEV50WMXEV5XV2E4Z1DAF0BC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostCategoryPositive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Sprawdź kod odpowiedzi i ciało\", function () {\r",
+							"  \r",
+							"    pm.response.to.have.status('Created');\r",
+							"\r",
+							"    // Oczekiwane ciało odpowiedzi\r",
+							"    var expectedBody = {\r",
+							"        \"name\": \"new category7\",\r",
+							"        \"slug\": \"new-category7\",\r",
+							"        \"id\": \"01hetzbk43gq5rfkdb4vnt3w1e\"\r",
+							"    };\r",
+							"\r",
+							"    // Sprawdzamy, czy odpowiedź zawiera oczekiwane ciało\r",
+							"    pm.response.to.have.jsonBody(expectedBody);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"new category7\",\r\n  \"slug\": \"new-category7\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostCategoryNegative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expect = require('chai').expect;\r",
+							"\r",
+							"\r",
+							"pm.test(\"Sprawdź status odpowiedzi\", function () {\r",
+							"    expect(pm.response.status).to.equal('Method Not Allowed');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"new category2\",\r\n  \"slug\": \"new-category2\"\r\n  \"test\": \"new-category2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HETY55G9CZVNSEW1BE4Z825H",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HETY55G9CZVNSEW1BE4Z825H"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostCategoryNegative2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expect = require('chai').expect;\r",
+							"\r",
+							"\r",
+							"pm.test(\"Sprawdź status odpowiedzi\", function () {\r",
+							"    expect(pm.response.status).to.equal('Unprocessable Entity');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"new category\",\r\n  \"slug\": \"new-category\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HETY55G9CZVNSEW1BE4Z825A",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HETY55G9CZVNSEW1BE4Z825A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutCategoryByIdNegative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Sprawdź kod odpowiedzi i ciało\", function () {\r",
+							"    \r",
+							"    pm.response.to.have.status('Unprocessable Content');\r",
+							"\r",
+							"    // Oczekiwane ciało odpowiedzi\r",
+							"    var expectedBody = {\r",
+							"        \"name\": \"new category\",\r",
+							"        \"slug\": \"new-category\"\r",
+							"    };\r",
+							"\r",
+							"    // Sprawdzamy, czy odpowiedź zawiera oczekiwane ciało\r",
+							"    pm.response.to.have.jsonBody(expectedBody);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"new category\",\r\n  \"slug\": \"new-category\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HEV50WMXEV5XV2E4Z1DAF0BD",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HEV50WMXEV5XV2E4Z1DAF0BD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutCategoryByIdPositive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Opis testu\r",
+							"pm.test(\"Sprawdź kod odpowiedzi i ciało\", function () {\r",
+							"    // Sprawdzamy, czy status odpowiedzi jest równy 200 (OK)\r",
+							"    pm.response.to.have.status('OK');\r",
+							"\r",
+							"    // Oczekiwane ciało odpowiedzi\r",
+							"    var expectedBody = {\r",
+							"        \"name\": \"new category10\",\r",
+							"        \"slug\": \"new-category10\"\r",
+							"    };\r",
+							"\r",
+							"    // Sprawdzamy, czy odpowiedź zawiera oczekiwane ciało\r",
+							"    pm.response.to.have.jsonBody(expectedBody);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"new category10\",\r\n  \"slug\": \"new-category10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HETY55G9CZVNSEW1BE4Z825H",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HETY55G9CZVNSEW1BE4Z825H"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutCategoryByIdNegativeInvalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expect = require('chai').expect;\r",
+							"\r",
+							"// Opis testu\r",
+							"pm.test(\"Sprawdź status odpowiedzi\", function () {\r",
+							"    // Sprawdzamy, czy status odpowiedzi jest równy 404 (NOT FOUND)\r",
+							"    expect(pm.response.status).to.equal('Not Found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HETY55G9CZVNSEW1BE4Z825A",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HETY55G9CZVNSEW1BE4Z825A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutCategoryByIdNegativeInvalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const expect = require('chai').expect;\r",
+							"\r",
+							"// Opis testu\r",
+							"pm.test(\"Sprawdź status odpowiedzi\", function () {\r",
+							"    // Sprawdzamy, czy status odpowiedzi jest równy 404 (NOT FOUND)\r",
+							"    expect(pm.response.status).to.equal('Not Found');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"new category3\",\r\n  \"slug\": \"new-category3\"\r\n}"
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HETY55G9CZVNSEW1BE4Z825A",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HETY55G9CZVNSEW1BE4Z825A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"customer@practicesoftwaretesting.com\",\r\n  \"password\": \"welcome01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/users/login",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LOgin admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"admin@practicesoftwaretesting.com\",\r\n  \"password\": \"welcome01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/users/login",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCategoryNegativeInvalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Sprawdź kod odpowiedzi i treść wiadomości dla żądania DELETE\", function () {\r",
+							"    // Sprawdzamy, czy status odpowiedzi jest równy 401 (Unauthorized)\r",
+							"    pm.response.to.have.status(401);\r",
+							"\r",
+							"    // Oczekiwana treść odpowiedzi\r",
+							"    var expectedResponse = {\r",
+							"        message: \"Unauthorized\"\r",
+							"    };\r",
+							"\r",
+							"    // Parsujemy ciało odpowiedzi do obiektu JSON i porównujemy z oczekiwanym obiektem\r",
+							"    var responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody).to.eql(expectedResponse);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1NjU3MzAsImV4cCI6MTY5OTU2NjAzMCwibmJmIjoxNjk5NTY1NzMwLCJqdGkiOiJaTkVNR1VyRGhjU1VGVlFuIiwic3ViIjoiMDFIRVRZNTVHMkQ2SzA2MlpIVzBWTlg4MUQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6InVzZXIifQ.66McRzw5wgtTuWdGyFC0kaLtvJZ5wVuNoY1uF38Z-0E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HETY55G9CZVNSEW1BE4Z825H",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HETY55G9CZVNSEW1BE4Z825H"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCategoryNegativeValid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Sprawdź status odpowiedzi dla żądania GET\", function () {\r",
+							"    // Sprawdzamy, czy status odpowiedzi jest równy 409 (Conflict)\r",
+							"    pm.response.to.have.status('Conflict');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1NjU5ODgsImV4cCI6MTY5OTU2NjI4OCwibmJmIjoxNjk5NTY1OTg4LCJqdGkiOiJEVFdSMDQwT0FqUUZWZXlvIiwic3ViIjoiMDFIRVRZNTVHMkQ2SzA2MlpIVzBWTlg4MUMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.dtpk6GJfff2SzVq6q5Yfex2y_Iz7xm00mJVCdeP0cFg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HEV50WN06FYKCXYE07AZ1847",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HEV50WN06FYKCXYE07AZ1847"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCategoryNegativeInvalid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Sprawdź status odpowiedzi dla żądania GET\", function () {\r",
+							"    // Sprawdzamy, czy status odpowiedzi jest równy 422 (Unprocessable Entity)\r",
+							"    pm.response.to.have.status('Unprocessable Entity');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1NjU5ODgsImV4cCI6MTY5OTU2NjI4OCwibmJmIjoxNjk5NTY1OTg4LCJqdGkiOiJEVFdSMDQwT0FqUUZWZXlvIiwic3ViIjoiMDFIRVRZNTVHMkQ2SzA2MlpIVzBWTlg4MUMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.dtpk6GJfff2SzVq6q5Yfex2y_Iz7xm00mJVCdeP0cFg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01HETY55G9CZVNSEW1BE4Z825A",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01HETY55G9CZVNSEW1BE4Z825A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteCategoryPositive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Sprawdź status odpowiedzi dla żądania GET\", function () {\r",
+							"    // Sprawdzamy, czy status odpowiedzi jest równy 204 (No Content)\r",
+							"    pm.response.to.have.status('No Content');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5wcmFjdGljZXNvZnR3YXJldGVzdGluZy5jb20vdXNlcnMvbG9naW4iLCJpYXQiOjE2OTk1NjU5ODgsImV4cCI6MTY5OTU2NjI4OCwibmJmIjoxNjk5NTY1OTg4LCJqdGkiOiJEVFdSMDQwT0FqUUZWZXlvIiwic3ViIjoiMDFIRVRZNTVHMkQ2SzA2MlpIVzBWTlg4MUMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6ImFkbWluIn0.dtpk6GJfff2SzVq6q5Yfex2y_Iz7xm00mJVCdeP0cFg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.practicesoftwaretesting.com/categories/01hev09tnz20gsvw7a8afct6yh",
+					"protocol": "https",
+					"host": [
+						"api",
+						"practicesoftwaretesting",
+						"com"
+					],
+					"path": [
+						"categories",
+						"01hev09tnz20gsvw7a8afct6yh"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base URL",
+			"value": "http://laptop-p2e92rrs:8080/PAS_Project-1.0-SNAPSHOT"
+		}
+	]
+}
