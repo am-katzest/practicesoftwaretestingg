@@ -240,6 +240,7 @@
 
 (When #"I attempt to add a category with name \"([^\"]+)\", slug \"([^\"]+)\" and parent \"([^\"]+)\""
       [driver name slug parent]
+      (prn "CAT" {:name name :slug slug :parent_id parent})
       (add-category driver {:name name :slug slug :parent_id parent})
       driver)
 
@@ -269,5 +270,4 @@
   (e/with-firefox driver
     (try (run-gherkin-file driver "test/features/categories_manipulation.feature")
          (finally
-           (delete-category driver "koty-domowe"))
-         )))
+           (delete-category driver "koty-domowe")))))
