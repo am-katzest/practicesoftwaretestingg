@@ -3,7 +3,9 @@
             [testing-gui.core :refer :all]
             [etaoin.api :as e]
             [etaoin.keys :as k]
+            [new-ways.clj-cukes :refer [Given run-gherkin-file When Then And]]
             [clojure.string :as str]))
+
 
 (defmacro ex->nil [& forms]
   `(try ~@forms
@@ -53,108 +55,108 @@
       (e/double-click (format "(//td[contains(text(), '%s')]/parent::*)//button" slug))
       (goto-category-panel))))
 
-(deftest category-testing
-  (e/with-firefox driver
-    (try
-      (is (= true (login driver admin)) "couldn't log in")
-      (let [uuid (random-uuid)
-            name (str "koty domowe" uuid)
-            preexisting-category {:parent_id "Other"
-                                  :name name
-                                  :slug (str "koty-domowe" uuid)}]
-        (testing "add-kat-pos"
+(comment (deftest category-testing
+   (e/with-firefox driver
+     (try
+       (is (= true (login driver admin)) "couldn't log in")
+       (let [uuid (random-uuid)
+             name (str "koty domowe" uuid)
+             preexisting-category {:parent_id "Other"
+                                   :name name
+                                   :slug (str "koty-domowe" uuid)}]
+         (testing "add-kat-pos"
 
-          (let [uuid (random-uuid)
-                name (str "koty domowe" uuid)
-                cat {:parent_id "Other"
-                     :name name
-                     :slug (str "koty-domowe" uuid)}]
-            (doto driver
-              (goto-category-panel))
-            (is (= false (e/has-text? driver name)) "kategoria już istnieje")
-            (add-category driver cat)
-            (is (= "Category saved!"
-                   (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
-                "nie udało się dodać kategorii")
-            (goto-category-panel driver)
-            (is (= true (e/has-text? driver name))
-                "kategorii jakimś cudem nie ma na panelu")))
+           (let [uuid (random-uuid)
+                 name (str "koty domowe" uuid)
+                 cat {:parent_id "Other"
+                      :name name
+                      :slug (str "koty-domowe" uuid)}]
+             (doto driver
+               (goto-category-panel))
+             (is (= false (e/has-text? driver name)) "kategoria już istnieje")
+             (add-category driver cat)
+             (is (= "Category saved!"
+                    (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
+                 "nie udało się dodać kategorii")
+             (goto-category-panel driver)
+             (is (= true (e/has-text? driver name))
+                 "kategorii jakimś cudem nie ma na panelu")))
 
-        (just-add-category driver preexisting-category) ; creates category for tests below
+         (just-add-category driver preexisting-category) ; creates category for tests below
 
-        (testing "add-kat-neg-duplicate"
-          (goto-category-panel driver)
-          (is (= true (e/has-text? driver (:name  preexisting-category))) "wymagana kategoria jeszcze nie istnieje")
-          (add-category driver preexisting-category)
-          (is (= "A category already exists with this slug."
-                 (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
-              "udało się dodać kategorię pomimo tego że jest duplikatem"))
+         (testing "add-kat-neg-duplicate"
+           (goto-category-panel driver)
+           (is (= true (e/has-text? driver (:name  preexisting-category))) "wymagana kategoria jeszcze nie istnieje")
+           (add-category driver preexisting-category)
+           (is (= "A category already exists with this slug."
+                  (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
+               "udało się dodać kategorię pomimo tego że jest duplikatem"))
 
-        (testing "add-kat-neg-whitespace"
-          (let [uuid (random-uuid)
-                name (str "koty domowe" uuid)
-                cat {:parent_id "Other"
-                     :name name
-                     :slug name}]
-            (goto-category-panel driver)
-            (is (= false (e/has-text? driver name)) "kategoria już istnieje")
-            (add-category driver cat)
-            (is (= "Slug cannot contain spaces"
-                   (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
-                "zły kod błędu")
-            (goto-category-panel driver)
-            (is (= false (e/has-text? driver name))
-                "błędna kategoria jest widoczna w panelu")))
+         (testing "add-kat-neg-whitespace"
+           (let [uuid (random-uuid)
+                 name (str "koty domowe" uuid)
+                 cat {:parent_id "Other"
+                      :name name
+                      :slug name}]
+             (goto-category-panel driver)
+             (is (= false (e/has-text? driver name)) "kategoria już istnieje")
+             (add-category driver cat)
+             (is (= "Slug cannot contain spaces"
+                    (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
+                 "zły kod błędu")
+             (goto-category-panel driver)
+             (is (= false (e/has-text? driver name))
+                 "błędna kategoria jest widoczna w panelu")))
 
 
-        (testing "mod-kat-pos"
-          (doto driver
-            (login admin)
-            (goto-category-panel))
-          (let [slug (:slug preexisting-category)
-                newname (str "sierściuchy" (random-uuid))]
-            (doto driver
-              (e/click  (format "(//td[contains(text(), '%s')]/parent::*)//a[contains(text(), 'Edit')]" slug))
-              (e/wait-visible :name)
-              (e/clear :name)
-              (e/fill :name newname)
-              (e/wait 1)
-              (e/click (by-text "Save"))
-              (e/wait-visible {:tag :div :fn/has-class "alert"})
-              (e/wait 1))
-            (is (= "Category saved!"
-                   (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
-                "nie udało się dodać kategorii")
-            (goto-category-panel driver)
-            (is (= true (e/has-text? driver newname))
-                "kategorii jakimś cudem nie ma na panelu")))
+         (testing "mod-kat-pos"
+           (doto driver
+             (login admin)
+             (goto-category-panel))
+           (let [slug (:slug preexisting-category)
+                 newname (str "sierściuchy" (random-uuid))]
+             (doto driver
+               (e/click  (format "(//td[contains(text(), '%s')]/parent::*)//a[contains(text(), 'Edit')]" slug))
+               (e/wait-visible :name)
+               (e/clear :name)
+               (e/fill :name newname)
+               (e/wait 1)
+               (e/click (by-text "Save"))
+               (e/wait-visible {:tag :div :fn/has-class "alert"})
+               (e/wait 1))
+             (is (= "Category saved!"
+                    (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
+                 "nie udało się dodać kategorii")
+             (goto-category-panel driver)
+             (is (= true (e/has-text? driver newname))
+                 "kategorii jakimś cudem nie ma na panelu")))
 
-        (testing "mod-kat-neg"
-          (doto driver
-            (goto-category-panel))
-          (let [slug (:slug preexisting-category)
-                newname (str "meow  meow" (random-uuid))]
-            (is (some? slug) "brak odpowiedniej kategorii")
-            (doto driver
-              (e/click  (format "(//td[contains(text(), '%s')]/parent::*)//a[contains(text(), 'Edit')]" slug))
-              (e/wait-visible :slug)
-              (e/clear :slug)
-              (e/fill :slug newname)
-              (e/wait 1)
-              (e/click (by-text "Save"))
-              (e/wait-visible {:tag :div :fn/has-class "alert"})
-              (e/wait 1))
-            (is (= "Slug cannot contain spaces"
-                   (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
-                "zła wiadomość błędu")
-            (goto-category-panel driver)
-            (is (= false (e/has-text? driver newname))
-                "zła kategoria została dodana")))
-        )
-      (finally
-          (println "cleanup")
-          (doto driver
-            (delete-category "koty-domowe"))))))
+         (testing "mod-kat-neg"
+           (doto driver
+             (goto-category-panel))
+           (let [slug (:slug preexisting-category)
+                 newname (str "meow  meow" (random-uuid))]
+             (is (some? slug) "brak odpowiedniej kategorii")
+             (doto driver
+               (e/click  (format "(//td[contains(text(), '%s')]/parent::*)//a[contains(text(), 'Edit')]" slug))
+               (e/wait-visible :slug)
+               (e/clear :slug)
+               (e/fill :slug newname)
+               (e/wait 1)
+               (e/click (by-text "Save"))
+               (e/wait-visible {:tag :div :fn/has-class "alert"})
+               (e/wait 1))
+             (is (= "Slug cannot contain spaces"
+                    (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
+                 "zła wiadomość błędu")
+             (goto-category-panel driver)
+             (is (= false (e/has-text? driver newname))
+                 "zła kategoria została dodana")))
+         )
+       (finally
+         (println "cleanup")
+         (doto driver
+           (delete-category "koty-domowe")))))))
 
 
 
@@ -228,3 +230,44 @@
           (register form)
           (e/wait-visible {:tag :div :fn/has-class "alert"}))
         (is (= true (e/has-text? driver "E-mail format is invalid")) "brak powiadomienia o niepoprawnym mailu")))))
+
+(def logins {"admin" admin})
+
+(Given #"I'm logged in as (\w+)" [driver user]
+       (println "------" driver user)
+       (is (= true (login driver (logins user))))
+       driver)
+
+(When #"I attempt to add a category with name \"([^\"]+)\", slug \"([^\"]+)\" and parent \"([^\"]+)\""
+      [driver name slug parent]
+      (add-category driver {:name name :slug slug :parent_id parent})
+      driver)
+
+(When #"there exists a category with name \"([^\"]+)\", slug \"([^\"]+)\" and parent \"([^\"]+)\""
+      [driver name slug parent]
+      (just-add-category driver {:name name :slug slug :parent_id parent})
+      driver)
+
+(Then #"the box should appear saying \"([^\"]+)\"" [driver box-text]
+      (is (= true (e/exists? driver {:tag :div :fn/has-class "alert"})) "no box appeared")
+      (is (= box-text
+             (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
+          "wrong popup text")
+      driver)
+
+(And #"on the list there should be a category named \"([^\"]+)\"" [driver name]
+     (goto-category-panel driver)
+     (is (= true (e/has-text? driver name)) "no such category")
+     driver)
+
+(And #"on the list there shouldn't be a category named \"([^\"]+)\"" [driver name]
+     (goto-category-panel driver)
+     (is (= false (e/has-text? driver name)) "category is on the page but it shouldn't")
+     driver)
+
+(deftest category-testing-cucumber
+  (e/with-firefox driver
+    (try (run-gherkin-file driver "test/features/categories_manipulation.feature")
+         (finally
+           (delete-category driver "koty-domowe"))
+         )))
