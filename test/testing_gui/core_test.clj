@@ -92,22 +92,6 @@
                   (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
                "udało się dodać kategorię pomimo tego że jest duplikatem"))
 
-         (testing "add-kat-neg-whitespace"
-           (let [uuid (random-uuid)
-                 name (str "koty domowe" uuid)
-                 cat {:parent_id "Other"
-                      :name name
-                      :slug name}]
-             (goto-category-panel driver)
-             (is (= false (e/has-text? driver name)) "kategoria już istnieje")
-             (add-category driver cat)
-             (is (= "Slug cannot contain spaces"
-                    (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
-                 "zły kod błędu")
-             (goto-category-panel driver)
-             (is (= false (e/has-text? driver name))
-                 "błędna kategoria jest widoczna w panelu")))
-
 
          (testing "mod-kat-pos"
            (doto driver
@@ -238,18 +222,18 @@
        (is (= true (login driver (logins user))))
        driver)
 
-(When #"I attempt to add a category with name \"([^\"]+)\", slug \"([^\"]+)\" and parent \"([^\"]+)\""
-      [driver name slug parent]
-      (prn "CAT" {:name name :slug slug :parent_id parent})
-      (add-category driver {:name name :slug slug :parent_id parent})
+(When #"I attempt to add a category with name \"([^\"]+)\", slug \"([^\"]+)\""
+      [driver name slug]
+      (add-category driver {:name name :slug slug :parent_id "Other"})
       driver)
 
-(When #"there exists a category with name \"([^\"]+)\", slug \"([^\"]+)\" and parent \"([^\"]+)\""
-      [driver name slug parent]
-      (just-add-category driver {:name name :slug slug :parent_id parent})
+(And #"there exists a category with name \"([^\"]+)\", slug \"([^\"]+)\""
+      [driver name slug]
+      (just-add-category driver {:name name :slug slug :parent_id "Other"})
       driver)
 
 (Then #"the box should appear saying \"([^\"]+)\"" [driver box-text]
+      (println "meowow")
       (is (= true (e/exists? driver {:tag :div :fn/has-class "alert"})) "no box appeared")
       (is (= box-text
              (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
