@@ -129,7 +129,6 @@
 (def logins {"admin" admin})
 
 (Given #"I'm logged in as (\w+)" [driver user]
-       (println "------" driver user)
        (is (= true (login driver (logins user))))
        driver)
 
