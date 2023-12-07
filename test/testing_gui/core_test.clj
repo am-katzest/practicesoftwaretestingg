@@ -233,7 +233,6 @@
       driver)
 
 (Then #"the box should appear saying \"([^\"]+)\"" [driver box-text]
-      (println "meowow")
       (is (= true (e/exists? driver {:tag :div :fn/has-class "alert"})) "no box appeared")
       (is (= box-text
              (e/get-element-text driver {:tag :div :fn/has-class "alert"}))
@@ -249,6 +248,26 @@
      (goto-category-panel driver)
      (is (= false (e/has-text? driver name)) "category is on the page but it shouldn't")
      driver)
+
+(When #"I attempt to modify category \"([^\"]+)\"" [driver slug]
+      (doto driver
+        (goto-category-panel)
+        (e/click  (format "(//td[contains(text(), '%s')]/parent::*)//a[contains(text(), 'Edit')]" slug))
+        (e/wait-visible :name)
+        (e/wait 0.1)))
+
+(And #"Set name to \"([^\"]+)\"" [driver new-name]
+     (doto driver
+       (e/clear :name)
+       (e/fill :name new-name)
+       (e/wait 0.5)))
+
+(And #"save" [driver]
+     (doto driver
+       (e/click (by-text "Save"))
+       (e/wait-visible {:tag :div :fn/has-class "alert"})
+       (e/wait 1)))
+
 
 (deftest category-testing-cucumber
   (e/with-firefox driver

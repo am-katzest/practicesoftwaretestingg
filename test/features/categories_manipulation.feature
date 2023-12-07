@@ -17,3 +17,12 @@ Feature: manipulating categories
     And there exists a category with name "koty domoweC", slug "koty-domoweC"
     When I attempt to add a category with name "jakieś kitku", slug "koty-domoweC"
     Then the box should appear saying "A category already exists with this slug."
+
+  Scenario: mod-kat-pos
+    Given I'm logged in as admin
+    And there exists a category with name "koty domoweD", slug "koty-domoweD"
+    When I attempt to modify category "koty-domoweC"
+    * set name to "kibby"
+    And save
+    Then the box should appear saying "Category saved!"
+    And on the list there shouldn't be a category named "kibby"
